@@ -1,0 +1,14 @@
+:root {
+  --color-text: #666;
+  --color-htext: #ff5777;
+  /* pink lighten-3 */
+  --color-cl:#F48FB1;
+  --color-tint: #ff8198;
+  --color-background: #fff;
+  --font-size: 14px;
+}
+
+body {
+  /* 禁止鼠标选中文字 */
+  user-select: none;
+}
