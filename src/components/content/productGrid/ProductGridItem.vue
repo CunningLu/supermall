@@ -1,8 +1,8 @@
 <template>
-  <van-image width="100%" :src="productItem.show.img" fit="fill" />
+  <van-image :src="productItem.show.img" fit="cover" width="100%" />
   <div>
-    <p class="van-ellipsis1">{{productItem.title}}</p>
-    {{productItem.price}} 已售{{productItem.sale}}
+    <p class="van-ellipsis1">{{ productItem.title }}</p>
+    <span style="color: var(--color-cl);font-size: 18px;">￥{{ productItem.price }}</span> 已售{{ productItem.sale }}
   </div>
 </template>
 

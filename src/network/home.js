@@ -1,4 +1,4 @@
-import {request} from '@/network/request.js'
+import { request } from '@/network/request.js'
 
 // 获取首页综合数据
 export function getMultiData() {

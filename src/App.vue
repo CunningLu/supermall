@@ -1,6 +1,10 @@
 <template>
-  <router-view />
-  <main-tab-bar></main-tab-bar>
+  <router-view #default="{ Component }">
+    <keep-alive exclude="Detail">
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
+  <main-tab-bar />
 </template>
 
 <script>
