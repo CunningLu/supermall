@@ -36,6 +36,15 @@
 </template>
 
 <script>
+import { ref, reactive, toRefs, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore, mapGetters } from 'vuex'
+
+import { Toast } from 'vant'
+
+import { getDetail, getRecommend, Product, Shop } from '@/network/detail.js'
+import usebacktop from '@/common/useBackTop.js'
+
 import DetailSwipe from './DetailSwipe'
 import DetailProduct from './DetailProduct'
 import DetailComments from './DetailComments'
@@ -44,13 +53,6 @@ import DetailParams from './DetailParams.vue'
 import DetailDetails from './DetailDetails'
 import ProductGrid from '@/components/content/productGrid/ProductGrid.vue'
 import DetailActionBar from './DetailActionBar'
-
-import { ref, reactive, toRefs, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { Toast } from 'vant'
-
-import { getDetail, getRecommend, Product, Shop } from '@/network/detail.js'
-import usebacktop from '@/common/useBackTop.js'
 
 export default {
   name: 'Detail',
@@ -69,6 +71,7 @@ export default {
     // 数据
     const route = useRoute()
     const router = useRouter()
+    const store = useStore()
     const iid = route.params.iid
     const activeName = ref('')
     const detailData = reactive({
@@ -223,9 +226,16 @@ export default {
     }
 
     // 底部动作栏
-    const addToCart = () => {
+    const addToCart = async () => {
+      const product = {}
+      product.iid = iid
+      product.title = detailData.product.title
+      product.image = detailData.product.topImages[0]
+      product.price = detailData.product.realPrice
+      const result = await store.dispatch('addToCart', product)
       Toast.clear()
-      Toast.success('添加成功')
+      Toast.success(result)
+      // Toast.success('添加成功')
     }
 
     // 生命周期
